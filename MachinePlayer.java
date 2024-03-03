@@ -1,7 +1,7 @@
 import java.util.Random;
 
-public class MchinePlayer extends Player  {
-	public MchinePlayer(String name,char marker) {
+public class MachinePlayer extends Player  {
+	public MachinePlayer(String name,char marker) {
 		this.name = name;
 		this.marker = marker;
 	}
@@ -25,7 +25,7 @@ public class MchinePlayer extends Player  {
 			 * will be exit and it is valid move
 			 */
 		} while (!isValidMove(row, col));
-		TicTacToe.palceMaker(row, col, marker);
+		TicTacToe.placeMarker(row, col, marker);
 
 	}
 }
