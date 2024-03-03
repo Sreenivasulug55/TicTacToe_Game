@@ -1,43 +1,41 @@
-
 public class Lunch_Game {
-	public static void StartGame(HumanPlayer p1, MchinePlayer machine, Player cp) {
-		while (true) {
-			if (TicTacToe.isBoardFull()) {
-				System.out.println("the game is draw both palyer moves are equal");
-				break;
-			} else {
-				System.out.println(cp.name + ": turn");
-				cp.makemove();
-				TicTacToe.Display();
-				// check for who will win the game in every move
-
-				if (TicTacToe.row_wise() || TicTacToe.column_wise() || TicTacToe.Diagonal()) {
-					System.out.println(cp.name + ": is won the Game");
-					break;
-				} else {
-					if (cp == p1) {
+    public static void startGame(HumanPlayer p1, MachinePlayer machine, Player cp) {
+        while (true) {
+            // First, check if the board is full or not
+            if (TicTacToe.isBoardFull()) {
+                System.out.println("The game is a draw. Both players' moves are equal.");
+                break;
+            } else {
+                System.out.println(cp.getName() + ": turn");
+                cp.makemove();
+                TicTacToe.display();
+                // Check if any player wins the game after each move
+                if (TicTacToe.rowWise() || TicTacToe.columnWise() || TicTacToe.diagonal()) {
+                    System.out.println(cp.getName() + ": has won the game!");
+                    break;
+                } else {
+                	if (cp == p1) {
 						cp = machine;
 					} else {
 						cp = p1;
 					}
-				}
+                }
+            }
+        }
+    }
 
-			}
-		}
-	}
-	
-	public static void main(String[] args) {
-		TicTacToe t = new TicTacToe();
-		HumanPlayer p1 = new HumanPlayer("bob", 'X');
-		MchinePlayer machine = new MchinePlayer("machine", 'O');
-		// reference obj we to using tracer if the who is the current mover
-		Player cp;
-		// in general first move is person 1 so i can put the p1 player
-		// he is the current player
-
-		cp = p1;
-		StartGame(p1, machine, cp);
-
-	}
-
+    public static void main(String[] args) {
+        // Create an instance of the TicTacToe game
+        TicTacToe t = new TicTacToe();
+        // Create human and machine players
+        HumanPlayer p1 = new HumanPlayer("Bob", 'X');
+        MachinePlayer machine = new MachinePlayer("Machine", 'O');
+        // Reference variable to keep track of the current player
+        Player cp;
+        // The first move is usually by player 1
+        // so we initialize the current player to player 1
+        cp = p1;
+        // Start the game
+        startGame(p1, machine, cp);
+    }
 }
