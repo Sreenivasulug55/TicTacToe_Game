@@ -1,105 +1,99 @@
-
 public class TicTacToe {
 
-	// declare 3X3 grid Board we are using two Dimensional Array
-	static char Board[][];
+    // Declare 3X3 grid Board using a two-dimensional array
+    public static char[][] board;
 
-	public TicTacToe() {
-		// one a create a obj it self allocate the size of board
-		Board = new char[3][3];
-		InitBoard();
+    public TicTacToe() {
+        // Allocate memory for the board when an object is created
+        board = new char[3][3];
+        initBoard();
+    }
+
+    private void initBoard() {
+        // Initialize the board with empty spaces
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                board[row][col] = ' ';
+            }
+        }
+    }
+
+    public static void display() {
+        System.out.println("-------------");
+        for (int row = 0; row < board.length; row++) {
+            System.out.print("| ");
+            for (int col = 0; col < board[row].length; col++) {
+                System.out.print(board[row][col] + " | ");
+            }
+            System.out.println();
+            System.out.println("-------------");
+        }
+    }
+
+    public static void placeMarker(int row, int col, char marker) {
+        // Check the bounds of the array before placing the marker
+        if (row >= 0 && row <= 2 && col >= 0 && col <= 2) {
+            board[row][col] = marker;
+        } else {
+            System.out.println("Invalid position");
+        }
+    }
+
+    public static boolean rowWise() {
+        // Check for winning condition in rows
+        for (int row = 0; row < board.length; row++) {
+            if (board[row][0] != ' ' && board[row][0] == board[row][1] && board[row][1] == board[row][2]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean columnWise() {
+        // Check for winning condition in columns
+        for (int col = 0; col < board[0].length; col++) {
+            if (board[0][col] != ' ' && board[0][col] == board[1][col] && board[1][col] == board[2][col]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean diagonal() {
+        // Check for winning condition in diagonals
+        if ((board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2])
+                || (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isBoardFull() {
+        // Check if the board is full
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] == ' ') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static String results() {
+        // Determine the result of the game
+        if (rowWise()) {
+            return "Row win";
+        } else if (columnWise()) {
+            return "Column win";
+        } else if (diagonal()) {
+            return "Diagonal win";
+        } else {
+            return "Draw the Match";
+        }
 	}
 
-	void InitBoard() {
-		for (int row = 0; row < Board.length; row++) {
-			for (int col = 0; col < Board.length; col++) {
-				Board[row][col] = ' ';
-			}
-		}
-	}
-
-	static void Display() {
-		System.out.println("-------------");
-		for (int row = 0; row < Board.length; row++) {
-			System.out.print("| ");
-			for (int col = 0; col < Board.length; col++) {
-				System.out.print(Board[row][col] + " | ");
-			}
-			System.out.println();
-			System.out.println("-------------");
-		}
-
-	}
-
-	static void palceMaker(int row, int col, char marker) {
-		// checks the bounds of an array
-		if (row >= 0 && row <= 2 && col >= 0 && col <= 2)
-			Board[row][col] = marker;
-
-		else
-			System.out.println("invalid position");
-	}
-
-	/*
-	 * we want check who is the winner , checking for row wise and column wise and
-	 * diagonal
-	 */
-	static boolean row_wise() {
-		// columns are constant so we can check only rows
-
-		for (int row = 0; row < Board.length; row++) {
-			if (Board[row][0] != ' ' && Board[row][0] == Board[row][1] && Board[row][1] == Board[row][2]) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	static boolean column_wise() { 
-		boolean result = false;
-
-		for (int col = 0; col < Board.length; col++) {
-			if (Board[0][col] != ' ' && Board[0][col] == Board[1][col] && Board[1][col] == Board[2][col]) {
-				result = true;
-			} else {
-				result = false;
-			}
-		}
-		return result;
-	}
-
-	static boolean Diagonal() {
-		boolean result = false;
-		if (Board[0][0] != ' ' && Board[0][0] == Board[1][1] && Board[1][1] == Board[2][2]
-				|| Board[0][2] != ' ' && Board[0][2] == Board[1][1] && Board[1][1] == Board[2][0])
-			result = true;
-
-		return result;
-	}
-
-	static boolean isBoardFull() {
-		for (int row = 0; row < Board.length; row++) {
-			for (int col = 0; col < Board.length; col++) {
-				if (Board[row][col] == ' ') {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	String Results() { 
-		if (row_wise()) {
-			return "row win";
-		} else if (column_wise()) {
-			return "column win";
-		} else if (Diagonal()) {
-			return "Diagonal win";
-		} else {
-			return "Draw the Match";
-		}
-	}
+	
 
 //	public static void main(String[] args) {
 //		TicTacToe obj  = new TicTacToe();
