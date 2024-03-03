@@ -24,7 +24,7 @@ public class HumanPlayer extends Player {
 			 * will be exit and it is valid move
 			 */
 		} while (!isValidMove(row, col));
-		TicTacToe.palceMaker(row, col, marker);
+		TicTacToe.placeMarker(row, col, marker);
 
 	}
 
